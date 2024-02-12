@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music Mood Visualization</title>
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: rgb(237, 237, 237);
+        font-family: "Poppins", sans-serif;
+      }
+      svg {
+        transform: scale(0.8);
+        top: -100px; /* Scale down to 80% of the original size */
+      }
+
+      .tick text {
+        fill: #888;
+        font-size: small;
+        writing-mode: tb;
+        text-anchor: middle;
+      }
+      .tick line {
+        stroke: #ccc;
+      }
+      .slider-container {
+        margin-left: 10px;
+        margin-top: 60px;
+      }
+      /* General Styles for the Slider */
+      .slider-container input[type="range"] {
+        -webkit-appearance: none; /* Removes default styling for WebKit/Blink */
+        appearance: none;
+        width: 200px; /* Full-width */
+        height: 25px; /* Specified height */
+        background: transparent; /* Transparent background */
+        outline: none; /* Removes the outline */
+        opacity: 0.7; /* Partial transparency */
+        -webkit-transition: 0.2s; /* Animation for the slider */
+        transition: opacity 0.2s;
+      }
+
+      /* Styles for the Slider Thumb */
+      .slider-container input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Removes default styling for WebKit/Blink */
+        appearance: none;
+        width: 20px; /* Width of the thumb */
+        height: 20px; /* Height of the thumb */
+        background: #4caf50; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+        border-radius: 50%; /* Makes it circular */
+        margin-top: -5px; /* Pull the thumb up by 5px */
+      }
+
+      .slider-container input[type="range"]::-moz-range-thumb {
+        width: 25px; /* Width of the thumb */
+        height: 25px; /* Height of the thumb */
+        background: #4caf50; /* Green background */
+        cursor: pointer; /* Cursor on hover */
+        border-radius: 50%; /* Makes it circular */
+      }
+
+      /* Styles for the Slider Track */
+      .slider-container input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%; /* Full width */
+        height: 9px; /* Specified height */
+        background: #bbb9b9; /* Grey background */
+        border-radius: 25px; /* Rounded corners */
+      }
+
+      .slider-container input[type="range"]::-moz-range-track {
+        width: 600px; /* Full width */
+        height: 8px; /* Specified height */
+        background: #ddd; /* Grey background */
+        border-radius: 25px; /* Rounded corners */
+        margin-left: 00px;
+      }
+
+      /* Styles for the focus state */
+      .slider-container input[type="range"]:focus {
+        outline: none; /* Removes the outline */
+      }
+      .chart {
+        /* or */
+        margin-top: -300px;
+      }
+
+      /* .date-label {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      } */
+      /* .slider-container {
+        position: absolute;
+        top: 10px;
+        width: 100%;
+        text-align: center;
+      } */
+      .slider-container {
+        position: absolute;
+        top: 90px;
+        left: 10%;
+        transform: translateX(-50%);
+      }
+
+      .info-text {
+        margin-top: -40px;
+        margin-left: 50px;
+      }
+      /* .date-label {
+  margin-top: 5px;
+  text-align: center;
+} */
+    </style>
+  </head>
+  <body>
+    <h1>Sound Features & Mood of My Days</h1>
+    <h4>
+      Average audio features of my listening habits & my self-recorded mood over
+      10 days
+    </h4>
+
+    <div id="chart"></div>
+    <!-- <h3>Average Audio Features (0 to 1) each Day</h3> -->
+    <!-- <div id="chartContainer"></div> -->
+    <!-- <div id="bpmChartContainer"></div> -->
+    <div class="slider-container">
+      <input type="range" id="date-slider" />
+      <div class="date-label" id="date-label"></div>
+    </div>
+    <h5 class="info-text">
+      <ul>
+        <li>
+          <i>Speechiness</i> - How speechy/wordy is the track? "The more
+          exclusively speech-like the recording (e.g. talk show, audio book,
+          poetry), the closer to 1.0 the attribute value" (Spotify
+          Documentation)
+        </li>
+        <li>
+          <i>Mode</i> - Major (1) vs. minor (0) scale; major keys feel more
+          positive than minor keys.
+        </li>
+        <li>
+          <i>Valence</i> - Measured 0 to 1; "Describing the musical positiveness
+          conveyed by a track." High valence is more cheerful, low valence is
+          more depressed. (Spotify Documentation)
+        </li>
+
+        <li>
+          <i>Instrumentalness</i> - Measured 0 to 1; Does the track have vocals?
+        </li>
+        <li>
+          <i>Energy</i> - Measured 0 to 1; How energetic is the track?
+          "Perceptual measure of intensity and activity" (Spotify Documentation)
+        </li>
+        <li>
+          <i>Danceability</i> - Measured 0 (least danceable) to 1 (most
+          danceable); How danceable is the track? "Based on a combination of
+          musical elements including tempo, rhythm stability, beat strength, and
+          overall regularity" (Spotify Documentation)
+        </li>
+
+        <li><i>Acousticness</i> - 0 to 1; How acoustic is the track?</li>
+      </ul>
+    </h5>
+    <script src="script.js"></script>
+  </body>
+</html>
